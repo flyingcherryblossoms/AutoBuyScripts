@@ -17,7 +17,7 @@ import random
 
 
 # ==== 设定抢购时间 （修改此处，指定抢购时间点）====
-BUY_TIME = "2018-10-14 19:31:30"
+BUY_TIME = "2020-11-11 00:00:00"
 
 
 
@@ -105,7 +105,7 @@ def buy():
     #打开购物车
     driver.get("https://cart.taobao.com/cart.htm")
     time.sleep(1)
- 
+
     #点击购物车里全选按钮
     if driver.find_element_by_id("J_SelectAll1"):
         driver.find_element_by_id("J_SelectAll1").click()
@@ -120,7 +120,7 @@ def buy():
             if submit_succ:
                 print("订单已经提交成功，无需继续抢购...")
                 break
-            if retry_submit_times > 50:
+            if retry_submit_times > 500:
                 print("重试抢购次数达到上限，放弃重试...")
                 break
 
@@ -145,15 +145,14 @@ def buy():
                             #print(ee)
                             print("没发现提交订单按钮，可能页面还没加载出来，重试...")
                             click_submit_times = click_submit_times + 1
-                            time.sleep(0.1)
+                            time.sleep(0.01)
             except Exception as e:
                 print(e)
                 print("不好，挂了，提交订单失败了...")
 
-        time.sleep(0.1)
+        time.sleep(0.01)
 
 
 login()
 keep_login_and_wait()
 buy()
- 
